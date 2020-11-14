@@ -1,19 +1,38 @@
 <template>
-    <div class="nav">
-        <div class="nav__links">
-            <router-link to="/">Home</router-link>
-            <router-link to="/shop">Shop</router-link>
-            <router-link to="/about">About</router-link>
-        </div>
-        <div class="nav__image">
-            <img src="@/assets/logo-blanc.png" alt="logo de derien en blanc">
+    <div>
+        <div class="nav">
+            <div class="nav__burger" v-if="windowWidth < 768">
+                <label for="burger-checkbox">
+                    <img src="@/assets/burger.svg" alt="">
+                </label>
+                <input type="checkbox" name="burger" id="burger-checkbox">
+                <div class="nav__phone-links" v-if="windowWidth < 768">
+                    <router-link to="/">Home</router-link>
+                    <router-link to="/shop">Shop</router-link>
+                    <router-link to="/about">About</router-link>
+                </div>
+            </div>
+            <div class="nav__links" v-if="windowWidth > 768">
+                <router-link to="/">Home</router-link>
+                <router-link to="/shop">Shop</router-link>
+                <router-link to="/about">About</router-link>
+            </div>
+            <div class="nav__image">
+                <img src="@/assets/logo-blanc.png" alt="logo de derien en blanc">
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+    computed: {
+        ...mapGetters({
+            windowWidth: 'getWindowWidth'
+        })
+    }
 }
 </script>
 
@@ -27,14 +46,23 @@ export default {
     align-items: center;
 
     &__links {
-        width: 30%;
+        width: 20%;
+        min-width: 200px;
         display: flex;
         justify-content: space-around;
 
     }
 
+    &__phone-links {
+        width: 20%;
+        min-width: 200px;
+        visibility: hidden;
+        display: none;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
     &__image {
-        align-self: center;
         & img {
             height: 30px;
         }
@@ -52,5 +80,23 @@ export default {
             font-style: italic;
         }
     }
+
+    &__burger {
+        display: flex;
+        flex-direction: column;
+        width: 10vh;
+        & label {
+            cursor: pointer;
+        }
+        & input{
+            display: none;
+
+            &:checked + .nav__phone-links{
+                display: flex;
+                visibility: visible;
+            }
+        }
+    }
 }
+
 </style>

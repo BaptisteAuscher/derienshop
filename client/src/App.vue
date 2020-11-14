@@ -8,7 +8,18 @@ import Navbar from '@/components/Navbar/Navbar'
 export default {
   components: {
     Navbar
-  }
+  },
+  methods : {
+    commitWindowWidth: function () {
+      this.$store.commit("setWindowWidth");
+    }
+  },
+  created() {
+    window.addEventListener("resize", this.commitWindowWidth);
+  },
+  unmount() {
+    window.removeEventListener("resize", this.commitWindowWidth);
+  },
 }
 </script>
 

@@ -9,7 +9,7 @@
                 <div class="nav__phone-links" v-if="windowWidth < 768">
                     <router-link to="/">Home</router-link>
                     <router-link to="/shop">Shop</router-link>
-                    <router-link to="/about">About</router-link>
+                    <router-link to="/about">About</router-link> 
                 </div>
             </div>
             <div class="nav__links" v-if="windowWidth > 768">
@@ -20,6 +20,10 @@
             <div class="nav__image">
                 <img src="@/assets/logo-blanc.png" alt="logo de derien en blanc">
             </div>
+            <div class="nav__icons">
+                <router-link to="/user"><img src="@/assets/user.svg" alt=""></router-link>
+                <router-link to="/cart"><img src="@/assets/cart.svg" alt=""></router-link>
+            </div>  
         </div>
     </div>
 </template>
@@ -39,17 +43,17 @@ export default {
 <style lang="scss">
 @import '@/scss/__variables.scss';
 .nav {
-    padding: 30px;
-    background: $black;
+    padding: 30px 10vw;
+    background: $fond-navbar;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     &__links {
         width: 20%;
         min-width: 200px;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
 
     }
 
@@ -84,7 +88,7 @@ export default {
     &__burger {
         display: flex;
         flex-direction: column;
-        width: 10vh;
+        width: 7vw;
         & label {
             cursor: pointer;
         }
@@ -96,6 +100,14 @@ export default {
                 visibility: visible;
             }
         }
+    }
+
+    &__icons {
+        display: flex;
+        justify-content: space-between;
+        width: 5vw;
+        min-width: 50px;
+        align-items: center;
     }
 }
 

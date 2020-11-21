@@ -19,27 +19,43 @@ router.get('/:id', getProduct, (req, res) => {
 
 // Add one product
 router.post('/', (req, res) => {
-    const product = new Product({
-        name: req.body.name,
-        imageUrl: req.body.imageUrl,
-        price: req.body.price
-    })
+    const product = new Product(req.body.product)
     try {
         const newProduct = product.save()
-        res.status(201).json(newProduct)
+        res.status(201).json({ message: "Product added succesfully" })
     } catch (err) {
         res.status(400).json({message: err.message})
     }
 })
 
 // Update one product
-router.patch('/:id', (req, res) => {
-    res.send('update one product by id : ' + req.params.id)
+router.patch('/:id', async (req, res) => {
+    await Product.findByIdAndUpdate(req.params.id,
+        {
+            ...req.body.product,
+            "updated_at": new Date()
+        },
+        {
+            new:true,
+            useFindAndModify: false
+        },
+        (err, product) => {
+            if (err) {
+                return res.status(500).json({message:err.message})
+            }
+            return res.json(product)
+        }
+    )
 })
 
 // Delete one product
-router.delete('/:id', (req, res) => {
-    res.send('delete one product by id : ' + req.params.id)
+router.delete('/:id', getProduct, async (req, res) => {
+    try {
+        res.product.remove()
+        res.json({message: "product removed succesfully"})
+    } catch (err) {
+        res.status(500).json({message: err.message})
+    }
 })
 
 async function getProduct(req, res, next) {

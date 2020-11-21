@@ -5,16 +5,18 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: {
+    colors: [
+        {type: mongoose.Schema.Types.ObjectId, ref: 'Color'}
+    ],
+    imageUrl: [{
         type: String,
         required: true
-    },
+    }],
     price: {
         type: Number,
         required: true
-    },
-    created_at: { type: Date, default: Date.now },
-    upadted_at: { type: Date, default: Date.now },
+    }
 });
+
 
 module.exports = mongoose.model('Product', productSchema)

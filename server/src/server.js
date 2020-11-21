@@ -18,6 +18,7 @@ db.once('open', () => console.log('Connected to database'))
 
 
 app.use('/api/products', cors(), require('./routes/products'))
+app.use('/api/colors', cors(), require('./routes/colors'))
 
 
 const PORT = process.env.PORT || 3000

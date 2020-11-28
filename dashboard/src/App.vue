@@ -1,6 +1,10 @@
 <template>
-  <Sidebar></Sidebar>
-  <router-view />
+    <div class="app">
+        <Sidebar></Sidebar>
+        <div class="container">
+          <router-view />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -21,6 +25,18 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+
+  & .app {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+
+    & .container {
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
 }
 </style>
 

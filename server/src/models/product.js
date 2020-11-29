@@ -8,10 +8,6 @@ const productSchema = new mongoose.Schema({
     colors: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Color'}
     ],
-    imageUrl: [{
-        type: String,
-        required: true
-    }],
     price: {
         type: Number,
         required: true

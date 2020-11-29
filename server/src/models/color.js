@@ -5,6 +5,10 @@ const colorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    images: [{
+        type: String,
+        required: true,
+    }],
     sizes: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Size'}
     ]

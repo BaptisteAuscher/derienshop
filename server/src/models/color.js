@@ -5,6 +5,10 @@ const colorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    hex: {
+        type: String,
+        required: true
+    },
     images: [{
         type: String,
         required: true,

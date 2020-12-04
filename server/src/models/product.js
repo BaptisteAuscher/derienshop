@@ -5,6 +5,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     colors: [
         {type: mongoose.Schema.Types.ObjectId, ref: 'Color'}
     ],

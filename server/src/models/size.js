@@ -6,8 +6,7 @@ const sizeSchema = new mongoose.Schema({
         required: true
     },
     qty: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 

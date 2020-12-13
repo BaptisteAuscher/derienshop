@@ -36,6 +36,7 @@
         </div>
         <button @click="addProduct(product)" class="submit">ADD PRODUCT</button>
         <p>{{product}}</p>
+        <p>{{test}}</p>
     </form>
 </template>
 
@@ -64,10 +65,7 @@ export default {
                         }]
                     }
                 ]
-            },
-
-            pickr: null,
-            options: {}
+            }
         }
     }, 
     methods: {
@@ -99,7 +97,7 @@ export default {
         ...mapActions([
             'addProduct'
         ])
-    },
+    }
 }
 </script>
 

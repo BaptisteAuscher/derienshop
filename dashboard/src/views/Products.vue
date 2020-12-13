@@ -4,26 +4,37 @@
         <h2>List</h2>
         <div class="products__list">
             <ul>
-                <ProductPreview></ProductPreview>
-                <ProductPreview></ProductPreview>
-                <ProductPreview></ProductPreview>
+                <ProductPreview v-for="product in products" :key="product.id" :product="product"></ProductPreview>
             </ul>
         </div>
         <h2>Add</h2>
         <div class="products__add">
             <AddProduct></AddProduct>
         </div>
+        <p>{{products}}</p>
     </div>
 </template>
 
 <script>
 import ProductPreview from "@/components/Products/ProductPreview.vue";
 import AddProduct from "@/components/Products/AddProduct.vue";
+import {mapGetters, mapActions} from "vuex";
 
 export default {
     components: {
         ProductPreview,
         AddProduct
+    },
+    methods: {
+        ...mapActions(['fetchProducts'])
+    },
+    computed: {
+        ...mapGetters({
+            products: 'getProducts'
+        })
+    },
+    created(){
+        this.fetchProducts();
     }
 }
 </script>

@@ -3,15 +3,14 @@
         <h1>Products</h1>
         <h2>List</h2>
         <div class="products__list">
-            <ul>
-                <ProductPreview v-for="product in products" :key="product.id" :product="product"></ProductPreview>
+            <ul v-if="products">
+                <ProductPreview  v-for="product in products" :key="product.id" :product="product"></ProductPreview>
             </ul>
         </div>
         <h2>Add</h2>
         <div class="products__add">
             <AddProduct></AddProduct>
         </div>
-        <p>{{products}}</p>
     </div>
 </template>
 
@@ -39,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .products {
         & h1 {
             padding-top: 40px;

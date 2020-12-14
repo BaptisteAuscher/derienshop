@@ -2,7 +2,7 @@
     <form>
         <h3>Product Information</h3>
         <input type="text" name="name" id="name" placeholder="Product name" v-model="product.name">
-        <textarea type="text" name="description" id="description" rows="4" placeholder="Product description" v-model="product.description"></textarea>
+        <textarea id="description" rows="4" placeholder="Product description" v-model="product.description"></textarea>
         <input type="number" name="price" id="price" placeholder="Prix en centimes d'euro" v-model="product.price">
         <h3>Colors</h3>
         <div class="form__colors" v-for="(color, colorId) in product.colors" :key="colorId">
@@ -11,7 +11,7 @@
             <div class="form__colors__images indent">
                 <h4>Images</h4>
                 <div class="form__colors__images__image" v-for="(image, imageId) in color.images" :key="imageId">
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image url" v-model="image.url">
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Image url" v-model="image.link">
                     <input type="text" id="imageAlt" name="imageAlt" placeholder="Image alt" v-model="image.alt">
                 </div>
                 <div class="buttons">
@@ -36,7 +36,6 @@
         </div>
         <button @click="addProduct(product)" class="submit">ADD PRODUCT</button>
         <p>{{product}}</p>
-        <p>{{test}}</p>
     </form>
 </template>
 
@@ -56,7 +55,7 @@ export default {
                         hex: "",
                         images: [
                             {
-                                url: "",
+                                link: "",
                                 alt: ""
                             }
                         ],
@@ -71,7 +70,7 @@ export default {
     methods: {
         addOneImage (id) {
             event.preventDefault();
-            this.product.colors[id].images.push({url: "", alt: ""});
+            this.product.colors[id].images.push({link: "", alt: ""});
         },
         deleteOneImage (id) {
             event.preventDefault();
@@ -87,7 +86,7 @@ export default {
         },
         addOneColor () {
             event.preventDefault();
-            this.product.colors.push({color: "",images: [{url: "",alt: ""}],sizes: [{size: ""}]});
+            this.product.colors.push({color: "",images: [{link: "",alt: ""}],sizes: [{size: ""}]});
         },
         deleteOneColor () {
             event.preventDefault();

@@ -3,13 +3,7 @@ import axios from "axios";
 
 
 const state = {
-    products: [
-        {
-            id: 1,
-            name: "hello",
-            price: 70
-        }
-    ]
+
 };
 
 const getters = {
@@ -26,7 +20,41 @@ const actions = {
 
         console.log(response.data);
         commit('setProducts', response.data);
+    },
+    
+    addProduct (context, newProduct) {
+        event.preventDefault();
+        console.log(newProduct);
+        const config = {
+            method: 'post',
+            url: 'http://localhost:3000/api/products',
+            headers: { },
+            data : newProduct
+        };
+
+        axios(config)
+            .then(res => console.log(JSON.stringify(res.data)))
+            .catch(err => console.log(err));
+
+        context.dispatch('fetchProducts');
+    },
+
+    deleteProduct(context, id) {
+        const config = {
+            method: 'delete',
+            url: 'http://localhost:3000/api/products/' + id,
+            headers: { },
+        };
+
+        confirm('u sure ?')
+
+        axios(config)
+            .then(res => console.log(JSON.stringify(res.data)))
+            .catch(err => console.log(err));
+
+        context.dispatch('fetchProducts');
     }
+
 };
 
 export default {

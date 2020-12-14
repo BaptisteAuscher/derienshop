@@ -18,14 +18,14 @@ router.get('/:id', getProduct, (req, res) => {
 })
 
 // Add one product
-router.post('/', (req, res) => {
-    const product = new Product(req.body.product)
-    try {
-        product.save()
-        res.status(201).json({ message: "Product added succesfully" })
-    } catch (err) {
-        res.status(400).json({message: err.message})
-    }
+router.post('/', async (req, res) => {
+    const product = new Product(req.body)
+    console.log(product)
+    await product.validate(err => {
+        return res.json(err)
+    })
+    await product.save(err => console.log(err))
+    res.status(201).json({ message: "Product added succesfully" })
 })
 
 // Update one product

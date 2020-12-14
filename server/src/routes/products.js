@@ -21,7 +21,7 @@ router.get('/:id', getProduct, (req, res) => {
 router.post('/', (req, res) => {
     const product = new Product(req.body.product)
     try {
-        const newProduct = product.save()
+        product.save()
         res.status(201).json({ message: "Product added succesfully" })
     } catch (err) {
         res.status(400).json({message: err.message})

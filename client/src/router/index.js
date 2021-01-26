@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-
 const routes = [
   {
     path: "/",
     name: "Shop",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Shop.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/Shop.vue")
   },
   {
     path: "/contact",
@@ -17,14 +15,18 @@ const routes = [
   {
     path: "/user/:id",
     name: "User",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/User.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/User.vue")
   },
   {
     path: "/cart",
     name: "Cart",
+    component: () => import(/* webpackChunkName: "about" */ "../views/Cart.vue")
+  },
+  {
+    path: "/product/:id",
+    name: "Product",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Cart.vue")
+      import(/* webpackChunkName: "about" */ "../views/Product.vue")
   }
 ];
 

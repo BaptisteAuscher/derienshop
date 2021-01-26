@@ -1,17 +1,11 @@
 import { createStore } from "vuex";
 
+import ui from "./modules/ui.js";
+import products from "./modules/products.js";
+
 export default createStore({
-  state: {
-    windowWidth: window.innerWidth
-  },
-  mutations: {
-    setWindowWidth(state) {
-      state.windowWidth = window.innerWidth;
-    }
-  },
-  actions: {},
-  modules: {},
-  getters: {
-    getWindowWidth: state => state.windowWidth
+  modules: {
+    ui,
+    products
   }
 });

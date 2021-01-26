@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import NavbarDesktop from '@/components/Navbar/NavbarDesktop';
-import NavbarPhone from '@/components/Navbar/NavbarPhone';
+import NavbarDesktop from "@/components/Navbar/NavbarDesktop";
+import NavbarPhone from "@/components/Navbar/NavbarPhone";
 
 import { mapGetters } from "vuex";
 export default {
@@ -14,8 +14,8 @@ export default {
     NavbarDesktop,
     NavbarPhone
   },
-  methods : {
-    commitWindowWidth: function () {
+  methods: {
+    commitWindowWidth: function() {
       this.$store.commit("setWindowWidth");
     }
   },
@@ -26,16 +26,16 @@ export default {
     window.removeEventListener("resize", this.commitWindowWidth);
   },
   computed: {
-        ...mapGetters({
-            windowWidth: 'getWindowWidth'
-        })
+    ...mapGetters({
+      windowWidth: "getWindowWidth"
+    })
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import '@/scss/default.scss';
-@import '@/scss/__variables.scss';
+@import "@/scss/default.scss";
+@import "@/scss/__variables.scss";
 
 #app {
   margin: 0;

@@ -32,8 +32,7 @@ router.post('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
     await Product.findByIdAndUpdate(req.params.id,
         {
-            ...req.body.product,
-            "updated_at": new Date()
+            ...req.body.product
         },
         {
             new:true,

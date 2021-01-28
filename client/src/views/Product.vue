@@ -15,10 +15,11 @@
       </section>
 
       <section class="product__cta" data-dropup-auto="false">
-        <select name="sizes" class="colorSelector" >
+        <select name="sizes" class="colorSelector" v-model="size">
+          <option value="choisissez votre taille" disabled selected>choisissez votre taille</option>
           <option class="option" :value="size.size" v-for="(size, index) in selectedColor.sizes" :key="index">{{size.size}}</option>
         </select>
-        <Cta text="add to cart"></Cta>
+        <Cta text="add to cart" @click="addItemToCart({product: product, selectedColor: selectedColor, size: size})"></Cta>
       </section>
     </article>
   </main>
@@ -37,7 +38,8 @@ export default {
   data() {
     return {
       selectedBorderIcon: "4px solid #515151",
-      defaultBorderIcon: "2px solid #515151"
+      defaultBorderIcon: "2px solid #515151",
+      size: 'choisissez votre taille'
     };
   },
   computed: {
@@ -47,7 +49,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(["fetchProduct"]),
+    ...mapActions(["fetchProduct", "addItemToCart"]),
     formatPrice: price => (price / 100).toFixed(2) + "EUR",
     selectColor (id) {
       this.$store.commit("setSelectedColor", {
@@ -77,7 +79,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    width: 35%;
 
     & h2, p {
       text-transform: uppercase;
@@ -121,6 +122,7 @@ export default {
 
   &__cta {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     & .colorSelector {
       outline: none;
@@ -129,11 +131,13 @@ export default {
       font-weight: 800;
       font-family: 'Work Sans';
       color: $grey;
-      width: 48%;
+      width: 100%;
       padding: 10px 20px;
       appearance: none;
       text-align: center;
       cursor: pointer;
+      background-color: transparent;
+      margin-bottom: 10px;
 
       &:active, &:focus, &:hover {
         border: 4px solid $pink;
@@ -144,6 +148,26 @@ export default {
         font-size: 20px;
         font-weight: 800;
       }
+    }
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .product {
+    justify-content: space-between;
+    width: 90vw;
+  }
+
+  .product__article {
+    width: 40%;
+  }
+
+  .product__cta {
+    flex-direction: row;
+
+    & .colorSelector {
+      margin: 0;
+      width: 48%;
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <aside>
-    <section class="container" :style="`width: ${imageSize}px`">
-      <div class="container__img" :style="`transform: translateX(${-imageSize * id}px)`">
-        <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" :style="`width: ${imageSize}px`" />
+    <section class="container" :style="`width: ${windowWidth < 1240 ? 350 : 650}px`">
+      <div class="container__img" :style="`transform: translateX(${-(windowWidth < 1240 ? 350 : 650) * id}px);`">
+        <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" :style="`width: ${windowWidth < 1240 ? 350 : 650}px`" />
       </div>
     </section>
     <section class="icons">
-      <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" @click="getImageKey(index)" :class="index == id ? 'selectedIcon' : ''" :style="`width: ${iconSize}px`" />
+      <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" @click="getImageKey(index)" :class="index == id ? 'selectedIcon' : ''" :style="`width: ${windowWidth < 1240 ? 50 : 70}px`" />
     </section>
   </aside>
 </template>
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       id: 0,
-      imageSize: this.windowWidth < 1050 ? 350 : 650,
+      breakpoint: 1050,
       iconSize: this.windowWidth < 1050 ? 50 : 70
     }
   },
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getWindowWidth: 'windowWidth'
+        windowWidth: "getWindowWidth"
     })
   }
 };

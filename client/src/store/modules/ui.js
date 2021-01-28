@@ -1,5 +1,9 @@
 const state = {
-  windowWidth: window.innerWidth
+  windowWidth: window.innerWidth,
+  message: {
+    type: "",
+    message: ""
+  }
 };
 
 const getters = {
@@ -9,12 +13,19 @@ const getters = {
 const mutations = {
   setWindowWidth(state) {
     state.windowWidth = window.innerWidth;
+  },
+  setMessage: (state, message) => {
+    state.message = {
+        type: message.type,
+        message: message.message
+    }
   }
 };
 
 const actions = {
   formatPrice: async (context, price) =>
-    (await (price / 100).toFixed(2)) + "EUR"
+    (await (price / 100).toFixed(2)) + "EUR",
+  
 };
 
 export default {

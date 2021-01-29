@@ -10,8 +10,7 @@ const state = {
 };
 
 const getters = {
-    getCart: state => state.cart,
-    getMessage: state => state.message
+    getCart: state => state.cart
 };
 
 const mutations = {
@@ -24,51 +23,70 @@ const mutations = {
         state.cart.subtotal += item.price;
         localStorage.setItem("cart", JSON.stringify(state.cart));
     },
-    setMessage: (state, message) => {
-        state.message = {
-            type: message.type,
-            message: message.message
-        }
+    INCREMENT_QTY: (state, index) => {
+        state.cart.items[index].qty += 1;
+        state.cart.subtotal += state.cart.items[index].price;
+
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    REDUCE_QTY: (state, index) => {
+        state.cart.items[index].qty -= 1;
+        state.cart.subtotal -= state.cart.items[index].price;
+
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    REMOVE_ITEM: (state, index) => {
+        let item = state.cart.items[index];
+        state.cart.subtotal -= item.price * item.qty;
+        state.cart.items.splice(index,1);
+
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+
     }
 };
 
 const actions = {
-    addItemToCart: ({commit}, item) => {
-        //Tester si la taille existe
-        const checkIfSizeExist = new Promise((resolve, reject) => {
+    testItem: ({ state }, item) => {
+        return new Promise((resolve, reject) => {
             item.selectedColor.sizes.forEach(size => {
                 if (item.size == size.size) {
-                    resolve(size)
+                    if (size.qty > 0) {
+                        const newItem = {
+                            name: item.product.name,
+                            color: item.selectedColor.color,
+                            size: item.size,
+                            price: item.product.price,
+                            image_link: item.selectedColor.images[0].link,
+                            qty: 1
+                        };
+                        state.cart.items.forEach(itemInCart => {
+                            if (itemInCart.name == newItem.name && itemInCart.color == newItem.color && itemInCart.size == newItem.size) {
+                                reject({type: "error", message: "Cet item est déjà dans votre panier."});
+                            }
+                        });
+                        resolve(newItem);
+                    } else {
+                        reject({type: "error", message: "Cette taille n'est plus disponible."});
+                    }
                 }
             });
-            reject({type: "error", message: "Veuillez indiquer votre taille."})
+            reject({type: "error", message: "Veuillez indiquer votre taille."});
         });
-
-        checkIfSizeExist
-            .then(size => {
-                if (size.qty > 0) {
-                    const newItem = {
-                        name: item.product.name,
-                        color: item.selectedColor.color,
-                        size: item.size,
-                        price: item.product.price,
-                        image_link: item.selectedColor.images[0].link,
-                        qty: 1
-                    };
-                    commit("addToCart", newItem);
-                    commit("setMessage", {type: 'success', message: 'Item ajouté au panier.'})              
-                } else {
-                    return commit("setMessage", {type: "error", message: "Cette taille n'est plus disponible."})
-                }
-            })
-            .catch(message => {
-                return commit("setMessage", message)
-            });
+    },
+    addItemToCart: ({ commit, dispatch}, item) => {
+        dispatch("testItem", item).then(newItem => {
+            commit("addToCart", newItem);
+            commit("ui/setMessage", {type: 'success', message: 'Item ajouté au panier.'});
+        }).catch(message => {
+            commit("ui/setMessage", message);
+        });
     },
 
     fetchCart: ({commit}) => {
-        let cart = JSON.parse(localStorage.cart);
-        commit("setCart", cart);
+        if (localStorage.cart && localStorage.cart) {
+            let cart = JSON.parse(localStorage.cart);
+            commit("setCart", cart);
+        }
     },
 
     emptyCart: ({ commit }) => {
@@ -77,6 +95,20 @@ const actions = {
             subtotal: 0
         };
         commit("setCart", cart);
+    },
+
+    incrementQty: ({ commit }, index) => {
+        commit("INCREMENT_QTY", index);
+    },
+    reduceQty: ({ state, commit }, index) => {
+        if (state.cart.items[index].qty < 2) {
+            return commit("ui/setMessage" , {type: 'error', message: 'Cette action est impossible.'});
+        }
+        commit("REDUCE_QTY", index);
+    },
+    removeItem: ({ commit }, index) => {
+        commit("REMOVE_ITEM", index);
+        commit("ui/setMessage", {type: 'success', message: 'Item supprimé avec succès.'})
     }
 }
 

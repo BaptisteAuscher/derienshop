@@ -8,13 +8,16 @@
       </div>
 
       <div class="navbar__icons">
-        <router-link to="/cart">
+        <router-link to="/cart" style="position: relative"> 
           <img src="@/assets/cart.svg" alt="cart icon" />
+          <div class="notif" v-if="cart.items.length > 0">
+
+          </div>
         </router-link>
         <img
           src="@/assets/burger.svg"
           alt="burger icon"
-          @click="show = !show"
+          @click="show = !show" class="burger"
         />
       </div>
     </div>
@@ -35,11 +38,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       show: false
     };
+  },
+  computed: {
+    ...mapGetters({
+      cart: "getCart"
+    })
   }
 };
 </script>
@@ -50,7 +59,7 @@ export default {
 
 .navbar {
   display: flex;
-  padding: 30px;
+  padding: 30px 0;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -62,8 +71,24 @@ export default {
   }
 
   &__icons {
-    img {
+    display: flex;
+    & a {
+      display: block;
+    }
+    img.burger {
       margin-left: 15px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .notif {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $pink;
+      position: absolute;
+      top: -10px;
+      right: -10px;  
     }
   }
 }

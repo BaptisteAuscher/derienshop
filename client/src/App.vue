@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     commitWindowWidth: function() {
-      this.$store.commit("setWindowWidth");
+      this.$store.commit("ui/setWindowWidth");
     }
   },
   created() {
@@ -33,8 +33,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      windowWidth: "getWindowWidth",
-      message: "getMessage"
+      windowWidth: "ui/getWindowWidth",
+      message: "ui/getMessage"
     })
   }
 };

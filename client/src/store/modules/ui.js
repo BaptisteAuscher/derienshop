@@ -7,7 +7,8 @@ const state = {
 };
 
 const getters = {
-  getWindowWidth: state => state.windowWidth
+  getWindowWidth: state => state.windowWidth,
+  getMessage: state => state.message
 };
 
 const mutations = {
@@ -29,6 +30,7 @@ const actions = {
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

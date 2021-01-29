@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      windowWidth: "getWindowWidth"
+      windowWidth: "ui/getWindowWidth"
     })
   },
   methods: {

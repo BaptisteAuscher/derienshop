@@ -11,7 +11,7 @@
     </div>
 
     <div class="navbar__right">
-      <router-link to="/cart">
+      <router-link to="/cart" style="position: relative">
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +49,9 @@
             />
           </g>
         </svg>
+        <div class="notif" v-if="cart.items.length > 0">
+
+        </div>
       </router-link>
       <router-link to="/">CONNEXION</router-link>
       <router-link to="/">INSCRIPTION</router-link>
@@ -57,7 +60,14 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      cart: "getCart"
+    })
+  }
+};
 </script>
 
 <style lang="scss">
@@ -97,6 +107,15 @@ export default {};
   &__right {
     display: flex;
 
+    & .notif {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $pink;
+      position: absolute;
+      top: -10px;
+      right: -10px;  
+    }
     a {
       margin-left: 20px;
     }

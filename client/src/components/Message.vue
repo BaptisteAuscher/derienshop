@@ -16,12 +16,12 @@ import { mapGetters } from "vuex";
 export default {
     computed: {
         ...mapGetters({
-            message: "getMessage"
+            message: "ui/getMessage"
         })
     },
     created () {
         setTimeout(() => {
-            this.$store.commit("setMessage", {
+            this.$store.commit("ui/setMessage", {
                 type: "",
                 message: ""
             });

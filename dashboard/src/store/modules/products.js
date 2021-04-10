@@ -3,46 +3,29 @@ import axios from "axios";
 
 
 const state = {
-
+    product: {},
+    products: []
 };
 
 const getters = {
-    getProducts: (state) => state.products
+    getProducts: (state) => state.products,
+    getProduct: (state) => state.product
 };
 
 const mutations = {
-    setProducts: (state, products) => state.products = products
+    setProducts: (state, products) => state.products = products,
+    setProduct: (state, product) => state.product = product
 };
 
 const actions = {
     async fetchProducts ({ commit }) {
-        const response = await axios.get('http://localhost:3000/api/products');
-
-        console.log(response.data);
+        const response = await axios.get(process.env.VUE_APP_API_URL + 'api/products');
         commit('setProducts', response.data);
     },
-    
-    addProduct (context, newProduct) {
-        event.preventDefault();
-        console.log(newProduct);
-        const config = {
-            method: 'post',
-            url: 'http://localhost:3000/api/products',
-            headers: { },
-            data : newProduct
-        };
-
-        axios(config)
-            .then(res => console.log(JSON.stringify(res.data)))
-            .catch(err => console.log(err));
-
-        context.dispatch('fetchProducts');
-    },
-
     deleteProduct(context, id) {
         const config = {
             method: 'delete',
-            url: 'http://localhost:3000/api/products/' + id,
+            url: process.env.VUE_APP_API_URL + 'api/products/' + id,
             headers: { },
         };
 
@@ -51,11 +34,18 @@ const actions = {
         axios(config)
             .then(res => console.log(JSON.stringify(res.data)))
             .catch(err => console.log(err));
-
+        
         context.dispatch('fetchProducts');
+    },
+
+    fetchProduct({ commit }, id) {
+
+        const response =  axios.get(process.env.VUE_APP_API_URL + 'api/products/' + id);
+
+        commit('setProduct', response.data);
     }
 
-};
+}; 
 
 export default {
     state,

@@ -1,7 +1,9 @@
 const state = {
     cart: {
         items: [],
-        subtotal: 0
+        subtotal: 0,
+        shippingCost: 0,
+        total: 0
     },
     message: {
         type: "",
@@ -42,6 +44,13 @@ const mutations = {
 
         localStorage.setItem("cart", JSON.stringify(state.cart));
 
+    },
+    SETSHIPPINGCOST : (state, shippingCost) => {
+        state.cart.shippingCost = shippingCost;
+        console.log(state.cart);
+        state.cart.total = state.cart.shippingCost + state.cart.subtotal;
+
+        localStorage.setItem("cart", JSON.stringify(state.cart));
     }
 };
 
@@ -92,7 +101,9 @@ const actions = {
     emptyCart: ({ commit }) => {
         let cart = {
             items: [],
-            subtotal: 0
+            subtotal: 0,
+            shippingCost: 0,
+            total: 0
         };
         commit("setCart", cart);
     },

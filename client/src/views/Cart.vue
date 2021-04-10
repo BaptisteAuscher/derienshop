@@ -31,11 +31,9 @@
         <p class="shipping-costs">des frais de ports additionnels peuvent être ajoutés.</p>
       </section>
       <section class="cart__cta">
-        <button class="cta__stripe">procéder au payment</button>
-        <p>ou</p>
-        <button class="cta__paypal">
-          <img src="@/assets/paypal.png" alt="">
-        </button>
+        <router-link to="/checkout/identify">
+          <button class="cta__stripe" :disabled="isCartEmpty">procéder au paiement</button>
+        </router-link>
       </section>
     </aside>
   </main>
@@ -48,7 +46,10 @@ export default {
   computed: {
     ...mapGetters({
       cart: "getCart"
-    })
+    }),
+    isCartEmpty : function() {
+      return this.cart.items.length < 1 ? true : false
+    }
   },
   methods: {
     ...mapActions(['emptyCart', 'incrementQty', 'reduceQty', 'removeItem']),
@@ -59,6 +60,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss/__variables.scss";
+
+#paypal-button-container {
+  width: 100%;
+}
+
 
 .cart {
   width: 90vw;
@@ -191,6 +197,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    a {
+      width: 100%;
+    }
     button {
       width: 100%;
       font-size: 20px;
@@ -207,9 +216,10 @@ export default {
       font-size: 15px;
       font-weight: 800;
       margin: 0;
-      margin-top: 30px;
+      margin-top: 40px;
       margin-bottom: 10px;
     }
+
 
     .cta__stripe {
       color:white;
@@ -218,13 +228,26 @@ export default {
       &:hover {
         background-color: $pink;
       }
+
+      &:disabled {
+        background-color: $grey;
+      }
     }
+
 
 
     .cta__paypal {
       background-color: #f4c439;
       img {
         height: 20px;
+      }
+
+      &:hover {
+        background-color: $pink;
+      }
+
+      &:disabled {
+        background-color: lightgrey;
       }
     }
   }

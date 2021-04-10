@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <Sidebar></Sidebar>
+        <Sidebar v-if="jwt"></Sidebar>
         <div class="container">
           <router-view />
         </div>
@@ -9,9 +9,28 @@
 
 <script>
 import Sidebar from '@/components/Sidebar';
+import { mapGetters} from "vuex";
+
 export default {
   components: {
     Sidebar
+  },
+  created: function () {
+      if (localStorage.user && localStorage.jwt) {
+        let user = JSON.parse(localStorage.user);
+        let jwt = localStorage.jwt;
+        this.$store.commit("SETJWT", jwt);
+        this.$store.commit("SETUSER", user);
+      }
+
+      if (!this.jwt) {
+        this.$router.push({
+          name: "Connexion"
+        })
+      }
+  },
+  computed: {
+    ...mapGetters(['jwt'])
   }
 }
 </script>

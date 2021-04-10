@@ -18,9 +18,29 @@ const routes = [
     component: () => import("../views/Orders.vue")
   },
   {
-    path: "/customers",
-    name: "Customers",
-    component: () => import("../views/Customers.vue")
+    path: "/messages",
+    name: "Messages",
+    component: () => import("../views/Messages.vue")
+  },
+  {
+    path: "/messages/:id",
+    name: "SingleMessage",
+    component: () => import("../views/SingleMessage.vue")
+  },
+  {
+    path: "/product/:id",
+    name: "EditProduct",
+    component: () => import("../views/EditProduct.vue")
+  },
+  {
+    path: "/orders/:id",
+    name: "SingleOrder",
+    component: () => import("../views/SingleOrder.vue")
+  },
+  {
+    path: "/connexion",
+    name: "Connexion",
+    component: () => import("../views/Connexion.vue")
   }
 ];
 

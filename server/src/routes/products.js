@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/product')
+const checkJwt = require('../middleware/check-jwt')
 
 // Get all products
 router.get('/', async (req, res) => {
@@ -18,7 +19,7 @@ router.get('/:id', getProduct, (req, res) => {
 })
 
 // Add one product
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
     const product = new Product(req.body)
     console.log(product)
     await product.validate(err => {
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
 })
 
 // Update one product
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', checkJwt, async (req, res) => {
     await Product.findByIdAndUpdate(req.params.id,
         {
             ...req.body.product
@@ -48,7 +49,7 @@ router.patch('/:id', async (req, res) => {
 })
 
 // Delete one product
-router.delete('/:id', getProduct, async (req, res) => {
+router.delete('/:id', checkJwt, getProduct, async (req, res) => {
     try {
         res.product.remove()
         res.json({message: "product removed succesfully"})
@@ -67,6 +68,7 @@ async function getProduct(req, res, next) {
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
+    console.log(product)
     res.product = product
     next()
 }

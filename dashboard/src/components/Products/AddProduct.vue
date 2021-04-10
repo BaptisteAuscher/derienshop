@@ -34,13 +34,12 @@
                 <button @click="addOneColor">ADD COLOR</button>
                 <button @click="deleteOneColor" class="delete">DELETE COLOR</button>
         </div>
-        <button @click="addProduct(product)" class="submit">ADD PRODUCT</button>
-        <p>{{product}}</p>
+        <button @click.prevent="addProduct()" class="submit">ADD PRODUCT</button>
     </form>
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import axios from "axios";
 
 export default {
     data () {
@@ -93,14 +92,26 @@ export default {
             this.product.colors.pop();
         },
 
-        ...mapActions([
-            'addProduct'
-        ])
+        addProduct: async function () {
+            let config = {
+                method: 'post',
+                url: process.env.VUE_APP_API_URL + 'api/products',
+                data: this.product,
+                headers: {
+                    "Authorization" : "Bearer " + this.$store.state.auth.jwt
+                }
+            }
+            await axios(config)
+                .then(response => {
+                    console.log(response);
+                    this.$store.dispatch("fetchProducts");
+                }).catch(err => console.log(err));
+        }
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     form {
         padding: 0;
         width: 70%;

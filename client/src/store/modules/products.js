@@ -20,13 +20,13 @@ const mutations = {
 const actions = {
   fetchProducts: ({ commit }) => {
     axios
-      .get("http://localhost:3000/api/products")
+      .get(process.env.VUE_APP_API_URL + "api/products")
       .then(res => commit("setProducts", res.data))
       .catch(err => console.log(err));
   },
   fetchProduct: ({ commit }, id) => {
     axios
-      .get("http://localhost:3000/api/products/" + id)
+      .get(process.env.VUE_APP_API_URL + "api/products/" + id)
       .then(res => {
         commit("setProduct", res.data);
         commit("setSelectedColor", {

@@ -29,8 +29,8 @@
         </div>
 
         <div class="menu__right">
-          <router-link to="/">CONNEXION</router-link>
-          <router-link to="/">INSCRIPTION</router-link>
+          <a href="https://www.instagram.com/derienltd" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+          <a href="https://www.twitter.com/derienltd" target="_blank" rel="noopener noreferrer">TWITTER</a>
         </div>
       </div>
     </transition>

@@ -27,6 +27,7 @@ export default {
   created() {
     window.addEventListener("resize", this.commitWindowWidth);
     this.$store.dispatch("fetchCart");
+    this.$store.dispatch("fetchCurrentCustomer");
   },
   unmount() {
     window.removeEventListener("resize", this.commitWindowWidth);

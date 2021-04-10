@@ -2,11 +2,11 @@
   <aside>
     <section class="container" :style="`width: ${windowWidth < 1240 ? 350 : 650}px`">
       <div class="container__img" :style="`transform: translateX(${-(windowWidth < 1240 ? 350 : 650) * id}px);`">
-        <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" :style="`width: ${windowWidth < 1240 ? 350 : 650}px`" />
+        <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" :style="`width: ${windowWidth < 1240 ? 350 : 650}px ; height: ${windowWidth < 1240 ? 350 : 650}px`" />
       </div>
     </section>
     <section class="icons">
-      <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" @click="getImageKey(index)" :class="index == id ? 'selectedIcon' : ''" :style="`width: ${windowWidth < 1240 ? 50 : 70}px`" />
+      <img  v-for="(image, index) in images" :key="index" :src="image.link" :alt="image.alt" @click="getImageKey(index)" :class="index == id ? 'selectedIcon' : ''" :style="`width: ${windowWidth < 1240 ? 50 : 70}px ; height: ${windowWidth < 1240 ? 50 : 70}px`" />
     </section>
   </aside>
 </template>

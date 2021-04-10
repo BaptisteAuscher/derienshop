@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://images.derienshop.com/favicon.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <base href="/">
   </head>
   <body>
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AYn2wkEJBh4faMLNGQFW1EgSFJeAoiUWq1Piyrr3FgRDbmz_fN2MXMM97Z2IOk1AKa6G0MEHwCmNKTYf&components=buttons,funding-eligibility&currency=EUR&intent=capture"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=<%= VUE_APP_PAYPAL_CLIENT %>&components=buttons,funding-eligibility&currency=EUR&intent=capture"></script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

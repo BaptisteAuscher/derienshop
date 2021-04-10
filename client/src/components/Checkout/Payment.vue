@@ -58,7 +58,7 @@ export default {
     data() {
         return {
             stripe: undefined,
-            spk: 'pk_test_BZ12nnqutoAjr21mbIwrtKlJ00WHMaXYLG',
+            spk: process.env.VUE_APP_STRIPE_CLIENT,
             card: undefined,
             agreeToTerms: false,
             isClickable: true,
@@ -218,6 +218,8 @@ export default {
 
 
         const self = this;
+
+        
 
         window.paypal.Buttons({
             fundingSource: window.paypal.FUNDING.PAYPAL,

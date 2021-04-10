@@ -4,12 +4,12 @@
             <h3>S'identifier</h3>
             <label>
                 <span>Prénom *</span>
-                <input type="text" placeholder="Harvey" v-model="newIdentity.firstname" :class="newIdentity.firstname ? 'green' : ''">
+                <input type="text" placeholder="John" v-model="newIdentity.firstname" :class="newIdentity.firstname ? 'green' : ''">
             </label>
 
             <label>
                 <span>Nom *</span>
-                <input type="text" placeholder="Specter" v-model="newIdentity.lastname" :class="newIdentity.lastname ? 'green' : ''">
+                <input type="text" placeholder="Doe" v-model="newIdentity.lastname" :class="newIdentity.lastname ? 'green' : ''">
             </label>
 
             <label>

@@ -19,7 +19,7 @@
           <option value="choisissez votre taille" disabled selected>choisissez votre taille</option>
           <option class="option" :value="size.size" v-for="(size, index) in selectedColor.sizes" :key="index">{{size.size}}</option>
         </select>
-        <Cta text="add to cart" @click="addItemToCart({product: product, selectedColor: selectedColor, size: size})"></Cta>
+        <Cta text="ajoutez au panier" @click="addItemToCart({product: product, selectedColor: selectedColor, size: size})"></Cta>
       </section>
     </article>
   </main>

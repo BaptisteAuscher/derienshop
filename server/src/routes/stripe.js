@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const stripe = require("stripe")('sk_test_51GbvMVIIGFeAd07oNNYpcrJWexSQLGVVS4FObqXhLYxUvY33nQHfHfqOg34UKNfQmRGGmnjgzZc1ejUSuNab4tOs005ATuB3Wl')
+const stripe = require("stripe")(process.env.STRIPE_SECRET)
 
 
 //creer le payment intent (fonction appelé côté client des que les frais de livraison sont ajoutés a la fin de l'étape 2 du checkout)

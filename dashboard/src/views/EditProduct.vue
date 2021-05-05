@@ -46,7 +46,6 @@
 
             <button @click.prevent="addProduct()" :class="'submit' + (loading ? ' loading' : '')">{{ !loading ? 'UPDATE' : 'WAIT...'}}</button>
 
-            {{product}}
         </form>
     </div>
 </template>

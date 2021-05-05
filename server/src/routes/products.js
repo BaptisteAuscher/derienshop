@@ -25,27 +25,28 @@ router.post('/', checkJwt, async (req, res) => {
         return res.json(err)
     })
     await product.save(err => console.log(err))
-    res.json({ message: "Product added succesfully" })
+    res.status(201).json({ message: "Product added succesfully" })
 })
 
 // Update one product
 router.patch('/:id', checkJwt, async (req, res) => {
-    await Product.findByIdAndUpdate(req.params.id,
-        {
-            ...req.body.product
-        },
-        {
-            new:true,
-            useFindAndModify: false
-        },
-        (err, product) => {
-            if (err && !product) {
-                return res.sendStatus(500)
+    try {
+        await Product.findByIdAndUpdate(req.params.id,
+            {
+                ...req.body.product
+            },
+            {
+                new:true,
+                useFindAndModify: false
+            },
+            (err, product) => {
+                if (err) return res.status(500).json({message:err.message})
+                res.json(product)
             }
-            console.log(product)
-            return res.json(product)
-        }
-    )
+        )
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 // Delete one product
@@ -68,7 +69,6 @@ async function getProduct(req, res, next) {
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
-    console.log(product)
     res.product = product
     next()
 }

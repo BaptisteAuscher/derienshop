@@ -90,7 +90,7 @@ export default {
             this.loading = true;
             let config = {
                 method: 'patch',
-                url: process.env.VUE_APP_API_URL + 'api/orders/' + this.$route.params.id,
+                url: process.env.VUE_APP_API_URL + 'api/products/' + this.$route.params.id,
                 data : {
                     product: this.product
                 },

@@ -21,17 +21,16 @@ router.get('/:id', getProduct, (req, res) => {
 // Add one product
 router.post('/', checkJwt, async (req, res) => {
     const product = new Product(req.body)
-    console.log(product)
     await product.validate(err => {
         return res.json(err)
     })
     await product.save(err => console.log(err))
-    res.status(201).json({ message: "Product added succesfully" })
+    res.json({ message: "Product added succesfully" })
 })
 
 // Update one product
 router.patch('/:id', checkJwt, async (req, res) => {
-    await Product.findByIdAndUpdate(req.params.id,
+    Product.findByIdAndUpdate(req.params.id,
         {
             ...req.body.product
         },
@@ -40,7 +39,7 @@ router.patch('/:id', checkJwt, async (req, res) => {
             useFindAndModify: false
         },
         (err, product) => {
-            if (err) {
+            if (err && !product) {
                 return res.status(500).json({message:err.message})
             }
             return res.json(product)

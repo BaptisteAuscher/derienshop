@@ -30,7 +30,7 @@ router.post('/', checkJwt, async (req, res) => {
 
 // Update one product
 router.patch('/:id', checkJwt, async (req, res) => {
-    Product.findByIdAndUpdate(req.params.id,
+    await Product.findByIdAndUpdate(req.params.id,
         {
             ...req.body.product
         },

@@ -39,6 +39,11 @@
                     <button @click="addOneColor">ADD COLOR</button>
                     <button @click="deleteOneColor" class="delete">DELETE COLOR</button>
             </div>
+            <div class="sold_out_box">
+                <input type="checkbox" name="isSoldOut" id="isSoldOut" v-model="product.isSoldOut">
+                <label for="isSoldOut">sold out ?</label>
+            </div>
+
             <button @click.prevent="addProduct()" :class="'submit' + (loading ? ' loading' : '')">{{ !loading ? 'UPDATE' : 'WAIT...'}}</button>
         </form>
     </div>
@@ -172,6 +177,18 @@ export default {
 
             &.submit {
                 background-color: #74a5f2;
+            }
+        }
+
+        .sold_out_box {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            & label, input {
+                cursor: pointer;
+                margin-right: 10px;
             }
         }
     }

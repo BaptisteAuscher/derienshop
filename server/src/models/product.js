@@ -44,6 +44,11 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    isSoldOut: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

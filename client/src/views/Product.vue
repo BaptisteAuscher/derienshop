@@ -19,7 +19,8 @@
           <option value="choisissez votre taille" disabled selected>choisissez votre taille</option>
           <option class="option" :value="size.size" v-for="(size, index) in selectedColor.sizes" :key="index">{{size.size}}</option>
         </select>
-        <Cta text="ajoutez au panier" @click="addItemToCart({product: product, selectedColor: selectedColor, size: size})"></Cta>
+        <Cta v-if="!product.isSoldOut" text="ajoutez au panier" @click="addItemToCart({product: product, selectedColor: selectedColor, size: size})"></Cta>
+        <Cta v-if="product.isSoldOut" :disabled="true" text="sold out"></Cta>
       </section>
     </article>
   </main>

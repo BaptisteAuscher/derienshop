@@ -1,11 +1,17 @@
 <template>
-  <button>{{ text }}</button>
+  <button :disabled="disabled" :class="disabled ? 'disabled' : 'abled'">{{ text }}</button>
 </template>
 
 <script>
 export default {
     name: 'Cta',
-    props: ['text']
+    props: {
+        text: String,
+        disabled: {
+            type: Boolean,
+            default: false
+        }
+    }
 }
 </script>
 
@@ -29,9 +35,13 @@ button {
 
     width: 100%;
 
-    &:hover {
+    &.abled:hover {
         background-color: $pink;
         border: 4px solid $pink;
+    }
+
+    &.disabled {
+        opacity: .6;
     }
 }
 

@@ -15,9 +15,10 @@
         class="product__name"
         v-show="hover || windowWidth < 1050"
         >{{ product.name }}<br v-if="windowWidth > 1050" />
-        <span v-if="windowWidth > 1050">{{ formatPrice(product.price) }}</span>
+        <span v-if="windowWidth > 1050">{{ product.isSoldOut ? 'SOLD OUT' : formatPrice(product.price) }}</span>
       </router-link>
     </transition>
+    
   </div>
 </template>
 

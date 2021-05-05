@@ -40,7 +40,7 @@ router.patch('/:id', checkJwt, async (req, res) => {
         },
         (err, product) => {
             if (err && !product) {
-                return res.status(500).json({message:err.message})
+                return res.sendStatus(500).json({message:err.message})
             }
             return res.json(product)
         }

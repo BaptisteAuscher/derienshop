@@ -47,7 +47,6 @@ const productSchema = new mongoose.Schema({
     },
     isSoldOut: {
         type: Boolean,
-        required: true,
         default: false
     }
 });

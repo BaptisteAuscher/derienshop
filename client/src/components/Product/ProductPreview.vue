@@ -102,6 +102,6 @@ export default {
 .up-enter-to,
 .up-leave {
   transform: translateY(0);
-  opacity: 1;
+  opacity: 100%;
 }
 </style>

@@ -66,7 +66,8 @@ export default {
         axios(process.env.VUE_APP_API_URL + 'api/products/' + this.$route.params.id)
             .then(response => {
                 this.product = response.data;
-                if (this.product.isSoldOut === null) {
+                console.log(this.product)
+                if (this.product.isSoldOut === undefined) {
                     this.product.isSoldOut = false
                 }
             });

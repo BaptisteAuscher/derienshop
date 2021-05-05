@@ -42,6 +42,7 @@ router.patch('/:id', checkJwt, async (req, res) => {
             if (err && !product) {
                 return res.sendStatus(500)
             }
+            console.log(product)
             return res.json(product)
         }
     )
